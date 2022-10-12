@@ -1,0 +1,27 @@
+
+--To find out what routes are most popular with different user types I'll use CONCAT to create strings of recognizable route
+names that can be counted and sorted.
+
+SELECT
+usertype,
+CONCAT(start_station_name,"to", end_station_name) AS route,
+COUNT(*) AS num_trips,
+ROUND(AVG(CAST(tripduration AS int64)/60),2) AS duration
+--Trip duration is in seconds, so I use CAST to count it as number with int64 and use AVG to divide by 60 seconds to get minutes and round it to 2 decimal places labeling column as duration.
+FROM
+`bigquery-public-data.new_york.citibike_trips`
+
+GROUP BY
+start_station_name, end_station_name, usertype
+
+ORDER BY
+num_trips DESC
+
+LIMIT 10
+
+/*This query could help this bike-sharing company understand their user base in different parts of the city and know where to
+keep more bikes for people to rent.*/
+
+
+
+

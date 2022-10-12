@@ -1,0 +1,159 @@
+--Dataset: https://archive.ics.uci.edu/ml/datasets/Automobile
+
+--This dataset named [cars] contains historical sales data, including details such as car features and prices. I'll use
+this data to find the top 10 most popular cars and trims. 
+--Before performing analysis, I’ll make sure the data is clean.
+--According to the data’s description, the fuel_type column should only have two unique string values: diesel and gas.
+--I'll run a query to check and make sure that’s true.
+
+SELECT
+  DISTINCT fuel_type
+FROM
+  cars.car_info
+  
+  ;
+
+--It seems the fuel_type column doesn’t have any unexpected values.
+--Next, I'll inspect the column that should contain numeric measurements of the cars. I'll check that the minimum
+and maximum lengths in the dataset align with the data description, which states that the lengths in this column should range from 141.1 to 208.1.
+--I'll use MIN and MAX functions to do this.
+
+SELECT
+  MIN(length) AS min_length,
+  MAX(length) AS max_length
+FROM
+  cars.car_info
+
+--The results confirm that 141.1 and 208.1 are the minimum and maximum values respectively in this column.
+
+;
+
+--Here, I want to check the data for any null or missing values.
+--I'll check to see if the num_of_doors column contains null values.
+SELECT
+  *
+FROM
+  cars.car_info 
+WHERE 
+  num_of_doors IS NULL
+
+  --After running this query, I find 2 rows with nulls. In this case, I would check with the sales manager or stakeholders
+  to get further clarification on what info to update this table with.
+  --I could easily complete this task by using the UPDATE Function but for this example, I won't use it here.
+  /*UPDATE 
+  cars.car_info
+SET
+  num_of_doors = "four"
+WHERE
+  make = "dodge"
+  AND fuel_type = "gas"
+  AND body_style = "sedan"
+  I would repeat this process to replace the null value for the Mazda as well. */
+
+;
+
+--After I would have finished ensuring that there aren’t any missing values in your data, I’ll want to check for other potential errors.
+--I can use SELECT DISTINCT to check what values exist in a column. I'll run a query to check the num_of_cylinders column.
+
+SELECT
+  DISTINCT num_of_cylinders
+FROM
+  cars.car_info
+
+--After running this, I notice that there are 1 too many rows. It seems that there is a mispelling.
+/* To correct the misspelling for all rows, I would use the SET Function. Normally, I'd run this query, but I will leave it in comments for this example.
+UPDATE
+  cars.car_info
+SET
+  num_of_cylinders = "two"
+WHERE
+  num_of_cylinders = "tow"  */
+
+;
+
+--According to the data description, the compression_ratio column values should range from 7 to 23. Again, I can use MIN and MAX to check if that’s correct.
+
+SELECT
+  MIN(compression_ratio) AS min_compression_ratio,
+  MAX(compression_ratio) AS max_compression_ratio
+FROM
+  cars.car_info
+
+--This query returns a maximum of 70. This may be an error because the maximum value in this column should be 23, not 70.
+--Assuming the 70 is most likely a 7.0, I'll run the above query again without the row with 70 to make sure that the rest of
+the values fall within the expected range of 7 to 23.
+
+;
+
+SELECT
+  MIN(compression_ratio) AS min_compression_ratio,
+  MAX(compression_ratio) AS max_compression_ratio
+FROM
+  cars.car_info
+WHERE
+  compression_ratio <> 70
+
+--I find that the highest value is 23, which aligns with the data description. This means that 70 is most likely an error.
+--I would check with the sales manager or stakeholder again, this time to confirm if this is incorrect and to see if this value
+should be removed or updated to another value.
+--To check and see how many rows the error occurs in, I will run a query using the COUNT Function.
+
+;
+
+SELECT
+  COUNT(*) AS num_of_rows_to_delete
+FROM
+  cars.car_info
+WHERE
+  compression_ratio = 70
+
+--The query shows that there is only one row with the incorrect 70 value. I could either Delete or Update this value using
+either the DELETE Function, or the UPDATE and SET Functions. However, for this example, I will leave the value as is.
+
+;
+
+--Last, I want to check the data for any inconsistencies that might cause errors.
+--For this example, I'll check the drive_wheels column for inconsistencies by running a query with a SELECT DISTINCT statement.
+
+SELECT
+  DISTINCT drive_wheels
+FROM
+  cars.car_info
+
+--The query returned duplicate values, which means there may be a space in 1 of the 4wd entries.
+
+;
+
+--To check and see, I use a LENGTH statement to determine the length of how long each of these string variables are.
+
+SELECT
+  DISTINCT drive_wheels,
+  LENGTH(drive_wheels) AS string_length
+FROM
+  cars.car_info
+
+--Results show some of the 4wd string have four characters instead of the three (4wd has 3 characters). 
+--Normally I would use the TRIM function to remove all extra spaces in the drive_wheels column.
+
+;
+
+/* This is the syntax I would normally use:
+ UPDATE
+  cars.car_info
+SET
+  drive_wheels = TRIM(drive_wheels)
+WHERE TRUE
+For this example, I will leave this query in comments. */
+
+--These are some of the Functions and Statements I'd use to make sure the data is clean, consistent, and ready for analysis.
+
+--Next I'll run a query to find the highest car value.
+
+SELECT
+MAX(price) AS Highest_Car_Price
+FROM
+cars.car_info
+
+--The Highest Car Value is $45,400.00.
+
+;

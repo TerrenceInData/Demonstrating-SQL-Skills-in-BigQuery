@@ -1,0 +1,40 @@
+
+--For this dataset, I will attempt to analyze subway ridership data to help improve the quality of the city’s public transportation
+I'll use basic calculations in SQL to help make sense of this data.
+
+--To find data on the change in weekly ridership from 2013 to 2014. I'll use query to subtract the number of riders in 2013 from the number of riders in 2014.
+
+SELECT 
+station_name, ridership_2013, ridership_2014,
+ridership_2014 - ridership_2013 AS change_2014_raw --(represents the change in ridership from 2013 to 2014 in raw numbers)
+
+
+ FROM `bigquery-public-data.new_york_subway.subway_ridership_2013_present` ;
+
+ --The results show the change in ridership from 2013 to 2014. The Atlantic Av - Barclays Ctr station gained an average of 1,774 riders per week.
+ The 4 Av station lost 321 riders.
+
+ --By including a basic calculation in the query, I get an idea of the change in ridership for each subway station in a given year.
+
+ --The original dataset describes average weekly ridership for each individual year. I'll write a new query to find average weekly
+ ridership for a longer period of time, such as the multi-year period from 2013-2016. 
+
+
+SELECT
+station_name,
+ridership_2013,
+ridership_2014,
+ridership_2015,
+ridership_2016,
+(ridership_2013 + ridership_2014 + ridership_2015 + ridership_2016) / 4 AS average
+FROM `bigquery-public-data.new_york_subway.subway_ridership_2013_present` ;
+
+--After running this query, I notice a few things. The results clearly show the trend in ridership at each station from 2013 to 2016. Weekly ridership at the Atlantic Av - Barclays Ctr station increased every year since 2013. 
+
+--Further, for the years 2014, 2015, and 2016, weekly ridership at Atlantic Av - Barclays Ctr exceeded the overall average for the period 2013-2016 (listed in the average column).
+
+
+
+
+
+ 

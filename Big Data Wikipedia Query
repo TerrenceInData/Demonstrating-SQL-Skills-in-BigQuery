@@ -1,0 +1,16 @@
+--Here, I run a quick sample Big Data query returning over 200,000 results. The results containing data on language, title and total views for each title.
+--I used ORDER BY to sort view in descending order or from Highest to Lowest.
+
+SELECT
+language,
+title,
+SUM(views) AS views
+FROM
+`bigquery-samples.wikipedia_benchmark.Wiki10B`
+WHERE
+title LIKE '%Google%'
+GROUP BY
+language,
+title
+ORDER BY
+views DESC;

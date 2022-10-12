@@ -1,0 +1,15 @@
+SELECT 
+  *
+FROM 
+  `bigquery-public-data.sdoh_cdc_wonder_natality.county_natality` 
+WHERE 
+  Year = '2018-01-01'
+ORDER BY
+  Births
+DESC
+LIMIT 
+  11
+
+  --In the query above I demonstrate the ability to use LIMIT to show a limited number of results.
+--This query shows the top 11 County births in descending order from highest to lowest.
+

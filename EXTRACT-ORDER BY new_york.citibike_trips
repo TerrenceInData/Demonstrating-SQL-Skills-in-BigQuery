@@ -1,0 +1,13 @@
+--Here, I write a Query using EXTRACT to pull year from startime as it's own string.
+
+SELECT
+EXTRACT(YEAR FROM STARTTIME) AS year,
+COUNT(*) AS number_of_rides
+FROM
+ `bigquery-public-data.new_york.citibike_trips`
+GROUP BY
+year
+ORDER BY
+year
+
+

@@ -1,0 +1,55 @@
+
+--First, I will run query to explore a small sample of the dataset.
+
+SELECT *
+
+FROM
+warehouse_orders.Orders
+LIMIT 100;
+
+--To report on distribution numbers by state, I'll need both the warehouse details and the order details.
+
+--I'll write a query for this.
+
+SELECT 
+orders.*,
+warehouse.warehouse_alias,
+warehouse.state
+
+FROM
+warehouse_orders.Orders AS orders
+JOIN
+warehouse_orders.Warehouse AS warehouse ON orders.warehouse_id = warehouse.warehouse_id
+
+LIMIT 100;
+
+--With this query, I now have the data I needed from both tables joined together.
+
+--Now, I'll count how many states are in the returned data.
+
+SELECT 
+COUNT(DISTINCT warehouse.state) AS num_states
+
+FROM
+warehouse_orders.Orders AS orders
+
+JOIN
+warehouse_orders.Warehouse AS warehouse ON orders.warehouse_id = warehouse.warehouse_id;
+
+--According to results, there are 3 distinct states in the Orders data.
+
+/*Now I will group by the state column in the warehouse table and call it warehouse.state*/
+
+SELECT warehouse.state AS state,
+COUNT(DISTINCT order_id) AS num_states
+
+FROM
+warehouse_orders.Orders AS orders
+
+JOIN
+warehouse_orders.Warehouse AS warehouse ON orders.warehouse_id = warehouse.warehouse_id
+GROUP BY
+warehouse.state
+
+--Now, I have three rows, one of each state represented in the Orders data.
+

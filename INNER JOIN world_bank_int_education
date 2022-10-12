@@ -1,0 +1,47 @@
+
+--I'll write a query that pulls information from both the international_education and country_summary tables
+
+SELECT 
+    `bigquery-public-data.world_bank_intl_education.international_education`.country_name, 
+    `bigquery-public-data.world_bank_intl_education.country_summary`.country_code, 
+    `bigquery-public-data.world_bank_intl_education.international_education`.value
+FROM 
+    `bigquery-public-data.world_bank_intl_education.international_education`
+INNER JOIN 
+    `bigquery-public-data.world_bank_intl_education.country_summary` 
+ON `bigquery-public-data.world_bank_intl_education.country_summary`.country_code = `bigquery-public-data.world_bank_intl_education.international_education`.country_code;
+
+--This query joins the tables on the country_code foreign key, and returns the country name, country code, and value column.
+This is quite a long, and makes this query hard to read and work with.
+
+--I can solve this by setting an alias for each table.
+
+SELECT 
+    edu.country_name,
+    summary.country_code,
+    edu.value
+FROM 
+    `bigquery-public-data.world_bank_intl_education.international_education` AS edu
+INNER JOIN 
+    `bigquery-public-data.world_bank_intl_education.country_summary` AS summary
+ON edu.country_code = summary.country_code;
+
+--This query is now much easier to read and understand.
+
+--This next query will tell me the average amount of money spent per region on education.
+
+SELECT 
+    AVG(edu.value) average_value, summary.region
+FROM 
+    `bigquery-public-data.world_bank_intl_education.international_education` AS edu
+INNER JOIN 
+    `bigquery-public-data.world_bank_intl_education.country_summary` AS summary
+ON edu.country_code = summary.country_code
+WHERE summary.region IS NOT null
+GROUP BY summary.region
+ORDER BY average_value DESC
+
+--Returned results show North America has the highest average amount of money spent on education.
+
+
+

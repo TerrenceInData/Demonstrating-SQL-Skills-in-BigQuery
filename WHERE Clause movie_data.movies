@@ -1,0 +1,36 @@
+
+--Here, I will use the WHERE statement to show an ability to FILTER this dataset which contains data on movies.
+--I will try to write a query that returns results that show info on all comedy movies.
+
+SELECT *
+
+FROM
+movie_data.movies
+
+WHERE
+Genre = 'comedy'
+
+--Query results show that there is no data to display. This means there is some sort of error in the query syntax.
+
+;
+
+--After over looking code, I realize that I did not capitalize the C in comedy, and the WHERE Clause is case sensitive when querying columns.
+--Column labels are likely to be capitalized, so I will capitalize comedy in my query.
+
+SELECT *
+
+FROM
+movie_data.movies
+
+WHERE
+Genre = 'Comedy'
+
+--Query results have come back accurately showing a list of all comedy movies.
+
+;
+
+
+
+
+
+

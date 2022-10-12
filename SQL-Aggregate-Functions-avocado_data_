@@ -1,0 +1,36 @@
+--First, I want to make sure I know how total is calculated. I need to see if total column is just small, large, and extra-large bags added together.
+I'll add the values in those three columns together in a query and then compare them to the total bags column in the dataset.
+
+SELECT
+Date,
+Region,
+Small_Bags,
+Large_Bags,
+XLarge_Bags,
+Total_Bags,
+Small_Bags + Large_Bags + XLarge_Bags AS Total_Bags_Calc
+
+FROM
+avocado_data.avocado_prices;
+
+-- When I compare the two columns showing the total number of bags, I can see that the values are the same. This lets me know the data is correct.
+Now that the total number of bags is verified, I'll use this data for another query.
+
+-- To help stakeholders make decisions on how to package avocados or which size bag to run a sale on.
+I'll write a query to calculate what percent of the total number of bags were small bags.
+
+SELECT
+Date,
+Region,
+Small_Bags,
+Total_Bags,
+(Small_Bags / Total_Bags)*100 AS Small_Bags_Percent
+FROM
+avocado_data.avocado_prices
+WHERE
+Total_Bags <> 0;
+
+
+
+
+

@@ -1,0 +1,35 @@
+--Here, I run a query using basic SQL structure, a SELECT FROM clause to execute a query to return customer names and cities.
+
+SELECT
+name,
+city
+FROM
+customer_data.customer_address
+
+;
+
+--After the query is ran, I now have a complete list of all customer's and their cities.
+
+--Next, I'll write a query to show how I would insert new data into a database or update existing data using the INSERT INTO statement.
+
+/* INSERT INTO customer_data.customer_address
+(customer_id, address, city, state, zipcode, country)
+VALUES
+(2645, '1234 SQL RD', 'Jackson', 'MI', 49202, 'US') */
+
+--This Statement would have added a row to customer_data.customer_address, but for this example I will not run query.
+
+--Next, if I were to want to update an address for a customer in the table, I could use the UPDATE and SET Functions to do this.
+
+/* 
+UPDATE customer_data.customer_address
+SET address = '123 New Address'
+WHERE customer_id = 2645
+
+*/
+
+--This query would have update customer 2645's address.
+
+
+
+

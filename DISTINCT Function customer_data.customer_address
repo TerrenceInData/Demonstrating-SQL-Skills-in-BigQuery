@@ -1,0 +1,27 @@
+
+--Here, I will write a query that will return customer id's.
+
+SELECT
+customer_id
+
+FROM
+customer_data.customer_address
+
+--After seeing results, I notice that there are quite a bit of duplicates.
+
+;
+
+--In order to remove duplicates, I will use DISTINCT in the SELECT statement for my new query.
+
+SELECT 
+DISTINCT customer_id
+FROM customer_data.customer_address
+
+-- Here, I used a distinct function in my select statement to avoid returning any duplicates while querying user ids.
+
+
+
+
+
+
+

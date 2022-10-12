@@ -1,0 +1,57 @@
+--Country Code should be 2 letter abbreviations. In order to confirm there are no errors in country codes, I use
+LENGTH function to measure Country Code letters in Country Column. I do this to double-check that my string variables are consistent.
+
+--To remind myself what this is, I label this column in the results as [letters_in_country] by using the AS function.
+
+SELECT
+LENGTH(Country) AS letters_in_Country
+FROM
+customer_data.customer_address
+
+--Upon running this Query, I notice that a few Countries were incorrectly listed in this Table.
+
+;
+
+--I attempt to fix this by telling SQL to filter the data to show only customers whose country contains more than two letters.
+
+SELECT 
+country 
+FROM 
+customer_data.customer_address 
+WHERE 
+LENGTH(country) > 2
+
+--Here, I find that the incorrectly listed countries show up as USA instead of US.
+
+;
+
+--I find a way to pull a list of all the customers in the US, including the two that have USA instead of US. I can
+account for this error in my results by using the SUBSTR function in my SQL query to return all customer id results in
+the USA by Querying only customer id rows that have US in them.
+
+SELECT
+customer_id
+FROM
+customer_data.customer_address
+WHERE
+SUBSTR(country,1,2) = 'US'
+
+--Going through our results, I see there's a couple duplicates where the customer ID is shown multiple times.
+--To get rid of duplicates, I add DISTINCT before customer_id.
+
+;
+
+SELECT
+DISTINCT
+customer_id
+FROM
+customer_data.customer_address
+WHERE
+SUBSTR(country,1,2) = 'US'
+
+--Upon running this query, I now have a final list of customer IDs of the customers who live in the US.
+
+
+
+
+

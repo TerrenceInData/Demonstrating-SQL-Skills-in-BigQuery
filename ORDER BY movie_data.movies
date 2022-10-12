@@ -1,0 +1,52 @@
+SELECT *
+
+FROM
+movie_data.movies
+
+ORDER BY Release_Date
+
+--In the query above, I was able to the SELECT ALL statement and get movie data to ORDER BY Release Date going from earliest to latest date.
+--I will reverse the order now by addind DESC for descending order in the next query.
+
+;
+
+SELECT *
+
+FROM
+movie_data.movies
+
+ORDER BY Release_Date DESC
+
+--Next I'll add a new line as a WHERE clause after FROM and before ORDER BY to filter movies by genre so that results show only
+comedies, but still sort all the results of the query according to the ORDER BY clause.
+
+;
+
+SELECT *
+
+FROM
+movie_data.movies
+
+WHERE Genre = "Comedy"
+
+ORDER BY Release_Date DESC
+
+--After running the query, results only return comedy movies listed from newest releases to oldest releases.
+-- Next query, I'll add an additional filter to show movies that earned over 300 million in the box office.
+
+;
+
+SELECT *
+
+FROM
+movie_data.movies
+
+WHERE Genre = "Comedy"
+
+AND Revenue > 300000000
+
+ORDER BY Release_Date DESC
+
+--This query above returned movies that earned over 300 million in the box office.
+
+

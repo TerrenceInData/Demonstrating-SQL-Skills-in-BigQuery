@@ -1,0 +1,28 @@
+--State abbreviations should only be 2 characters. Here, I run a Query to check to see if any states have more than 2 characters for State Column.
+
+SELECT
+State
+FROM
+customer_data.customer_address
+WHERE
+LENGTH(state) > 2
+
+--I notice a state, Ohio, pops up as having greater than 3 characters. We know Ohio only has two characters.
+
+;
+
+--Here, I want to get the customer IDs of the customers who live in Ohio while also removing the extra spaces. I use the TRIM Function to remove extra spaces.
+--I also use DISTINCT Function to Filter out All Duplicates from Results.
+
+SELECT
+DISTINCT
+customer_id
+FROM
+customer_data.customer_address
+WHERE
+TRIM(state) = "OH"
+
+--Now I have all customer IDs of the customers who live in Ohio, including the customer with the extra space after the H.
+
+
+

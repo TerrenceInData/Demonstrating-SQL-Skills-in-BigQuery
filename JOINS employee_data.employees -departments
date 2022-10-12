@@ -1,0 +1,35 @@
+
+--I will run a query using INNER JOIN to join matching data from two different tables and join them together in 1 table.
+
+--I can write a query to get a list of employees with their department name, excluding any employee without a department ID.
+--The department ID record is used in both tables, so I can use an INNER JOIN to return a list with only those employees included in it.
+
+SELECT 
+employees.name AS employee_name,
+employees.role AS employee_role,
+departments.name AS department_name
+FROM
+employee_data.employees
+INNER JOIN
+employee_data.departments ON
+employees.department_id = departments.department_id
+;
+
+
+--This query has correctly INNER JOINED each of the sought criterias intended for this table.
+
+--Next, I will use OUTER JOIN which will fetch all of the employee names and departments together in 1 table.
+
+--The query has run successfully, leaving nulls for fields with no values because of joined columns that don't have matching values.
+
+SELECT 
+employees.name AS employee_name,
+employees.role AS employee_role,
+departments.name AS department_name
+FROM
+employee_data.employees
+FULL OUTER JOIN
+employee_data.departments ON
+employees.department_id = departments.department_id
+
+

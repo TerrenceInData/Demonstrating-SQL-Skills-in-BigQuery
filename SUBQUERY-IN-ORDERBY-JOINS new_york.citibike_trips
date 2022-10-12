@@ -1,0 +1,66 @@
+
+
+
+-- Next, I'll build the outer SELECT query to select the station ID and the number of bikes available. 
+--Then, I'll put the SELECT query that's pulling the average number of bikes inside the outer query by using parentheses.
+--I'll also build FROM into the subquery before closing it with another parenthesis, and I'll complete the outer query.
+SELECT
+station_id,
+num_bikes_available,
+
+/* For the first statement, I'll look to compare the number of bikes available at a station, to the average number of bikes available.
+I'll use this query to pull the average number of bikes available. Then I'll incorporate it as a subquery.*/
+(SELECT
+AVG(num_bikes_available)
+FROM `bigquery-public-data.new_york.citibike_stations`) AS avg_num_bikes_available
+
+FROM `bigquery-public-data.new_york.citibike_stations`;
+
+--Now, results return a table with both the number of bikes available and the average number of bikes available at different stations.
+
+--For this next query, I'll usse a FROM statement to calculate the number of rides that have started at each station over time.
+
+SELECT
+station_id,
+name,
+number_of_rides AS number_of_rides_starting_at_station
+FROM
+(
+  SELECT
+  start_station_id,
+  COUNT (*) number_of_rides
+  FROM `bigquery-public-data.new_york.citibike_trips`
+  GROUP BY
+  start_station_id
+)
+
+AS station_num_trips
+INNER JOIN
+`bigquery-public-data.new_york.citibike_stations` ON station_id = start_station_id
+ORDER BY
+number_of_rides DESC;
+
+--This query now returns the number of rides started at each station
+
+--The bike-sharing company has two kinds of users: subscribers and one-time customers. I'll use the following query to get a list of stations subscriber used.
+
+SELECT
+station_id,
+name
+
+FROM
+`bigquery-public-data.new_york.citibike_stations`
+WHERE
+station_id IN
+--Subquery
+(
+  SELECT
+  start_station_id 
+  FROM
+  `bigquery-public-data.new_york.citibike_trips`
+  WHERE
+  usertype = 'Subscriber'
+)
+
+--The query returns the station id and names for stations that fit desired criteria.
+

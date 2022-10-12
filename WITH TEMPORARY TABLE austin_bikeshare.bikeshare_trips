@@ -1,0 +1,40 @@
+
+--Scenario: Help bikeshare company find their best/ most popular bike.
+
+--I'll use the WITH clause to create a temporary table so I can find out which station the longest (duration) bike ride started.
+
+--To do this, I'll need to create a temp table to find the ID number of the bike that has taken the longest total trips (in minutes). I can take a sum of the minutes of each trip for each bike, then sort by descending order to find the bike that has spent the most minutes being used.
+
+
+WITH 
+longest_used_bike AS (
+  SELECT
+  bikeid,
+  SUM(duration_minutes) AS trip_duration
+FROM `bigquery-public-data.austin_bikeshare.bikeshare_trips`
+GROUP BY
+bikeid
+ORDER BY trip_duration DESC
+LIMIT 1
+)
+##Find station at which the longest-used bike leaves most often
+
+SELECT
+trips.start_station_id,
+COUNT(*) AS trip_ct
+FROM
+Longest_used_bike AS longest
+INNER JOIN 
+`bigquery-public-data.austin_bikeshare.bikeshare_trips` AS trips
+ON longest.bikeid = trips.bikeid
+GROUP BY
+trips.start_station_id
+ORDER BY
+trip_ct DESC
+LIMIT 1;
+
+##Station with ID Number 3798 has the highest trip count of longest used bike at 113.
+
+
+
+

@@ -3,7 +3,8 @@
 
 --I'll use the WITH clause to create a temporary table so I can find out which station the longest (duration) bike ride started.
 
---To do this, I'll need to create a temp table to find the ID number of the bike that has taken the longest total trips (in minutes). I can take a sum of the minutes of each trip for each bike, then sort by descending order to find the bike that has spent the most minutes being used.
+--To do this, I'll need to create a temp table to find the ID number of the bike that has taken the longest total trips (in minutes).
+--I can take a sum of the minutes of each trip for each bike, then sort by descending order to find the bike that has spent the most minutes being used.
 
 
 WITH 

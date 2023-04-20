@@ -29,9 +29,11 @@ ridership_2016,
 (ridership_2013 + ridership_2014 + ridership_2015 + ridership_2016) / 4 AS average
 FROM `bigquery-public-data.new_york_subway.subway_ridership_2013_present` ;
 
---After running this query, I notice a few things. The results clearly show the trend in ridership at each station from 2013 to 2016. Weekly ridership at the Atlantic Av - Barclays Ctr station increased every year since 2013. 
+--After running this query, I notice a few things. The results clearly show the trend in ridership at each station from 2013 to 2016.
+--Weekly ridership at the Atlantic Av - Barclays Ctr station increased every year since 2013. 
 
---Further, for the years 2014, 2015, and 2016, weekly ridership at Atlantic Av - Barclays Ctr exceeded the overall average for the period 2013-2016 (listed in the average column).
+--Further, for the years 2014, 2015, and 2016, weekly ridership at Atlantic Av - Barclays Ctr exceeded the overall average for
+--the period 2013-2016 (listed in the average column).
 
 
 

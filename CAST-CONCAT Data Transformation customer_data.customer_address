@@ -1,4 +1,5 @@
-/* In this demonstration, I uploaded this data set by manually creating the schema, editing it as text. My goal in this query is to show data transformation techniques and format this data correctly from one data type, into another. */
+/* In this demonstration, I uploaded this data set by manually creating the schema, editing it as text.
+My goal in this query is to show data transformation techniques and format this data correctly from one data type, into another. */
 
 SELECT
 purchase_price
@@ -6,11 +7,15 @@ FROM
 customer_data.customer_purchase
 ORDER BY purchase_price DESC
 
---After running an ORDER BY, DESC query, I can see that 89.85 shows up at the top with 799.99 below it. 799.99 is a bigger number than 89.85. The database may not be recognizing that they're numbers. It didn't sort them. I can see that purchase_price is not responding to Sorting commands. This means that the purchase_price column is likely not in correct format. It may be reading as text instead of numerical.
+--After running an ORDER BY, DESC query, I can see that 89.85 shows up at the top with 799.99 below it.
+--799.99 is a bigger number than 89.85. The database may not be recognizing that they're numbers. It didn't sort them.
+--I can see that purchase_price is not responding to Sorting commands. This means that the purchase_price column is likely not in correct format.
+--It may be reading as text instead of numerical.
 
 ;
 
---I take a look at the schema to investigate further and notice, the database sees the wrong datatype for what purchase_price is. The database thinks purchase_price is a STRING, when it should be a FLOAT, so that it can recognize it as a number that contains a decimal.
+--I take a look at the schema to investigate further and notice, the database sees the wrong datatype for what purchase_price is.
+--The database thinks purchase_price is a STRING, when it should be a FLOAT, so that it can recognize it as a number that contains a decimal.
 
 --I will attempt to Typecast data into the correct format with the CAST function.
 
@@ -25,7 +30,8 @@ CAST(purchase_price AS FLOAT64) DESC
 
 ;
 
---Next, I will write a SQL query that will pull date and purchase_price for all purchases that occurred between December 1st, 2020, and December 31st, 2020 to get an exemple on holiday sales info.
+--Next, I will write a SQL query that will pull date and purchase_price for all purchases that occurred between
+--December 1st, 2020, and December 31st, 2020 to get an exemple on holiday sales info.
 
 SELECT
 date,
